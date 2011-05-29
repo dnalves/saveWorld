@@ -100,4 +100,15 @@ public abstract class AlgoritimoGenetico {
 		
 		return this.getMelhorSolucao(sw.getEstacoes()); 
 	}
+	
+	/**
+	 * Ordena solucoes candidatas em ordem decrescente de valor objetivo.
+	 *
+	 * @param solucoes as soluções
+	 * @return the byte[][]
+	 */
+	protected byte[][] ordenaSolucoes(byte[][] solucoes){
+		//TODO fazer o metodo 
+		return null;
+	}
 }

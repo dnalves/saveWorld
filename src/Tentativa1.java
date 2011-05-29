@@ -21,6 +21,15 @@ public class Tentativa1 extends AlgoritimoGenetico {
 	@Override
 	protected byte[][] evolua() {
 		
+		int metade = sw.getNumEstacoes() / 2;
+		
+		// Coloca a 1a metade da instancia vinda de P, a 2a metade é de PLinha
+		for (int i = 0; i < populacaoP.length; i++) {
+			for (int j = 0; j < metade; j++) {
+				populacaoPLinha[i][j] = populacaoP[i][j];
+			}
+		}
+		
 		return null;
 	}
 
@@ -34,9 +43,9 @@ public class Tentativa1 extends AlgoritimoGenetico {
 		for (int i = 0; i < tamanhoPop; i++) {
 			for (int j = 0; j < numEstacoes; j++) {
 				
-				//Gerando popula‹o inicial rand™mica
+				//Gerando populaca‹o inicial rando™mica
 				retorno[i][j] = (byte) generator.nextInt(2);
-				System.out.println(retorno[i][j]);
+				
 			}
 		}
 		
