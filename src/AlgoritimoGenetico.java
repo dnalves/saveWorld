@@ -3,13 +3,20 @@ public abstract class AlgoritimoGenetico {
 
 	protected byte[][] populacaoP;
 	protected byte[][] populacaoPLinha;
+	protected SaveWorld sw;
+	protected int tamanhoPop;
 	
+	public AlgoritimoGenetico(SaveWorld sw, int tamanhoPop){
+		super();
+		this.sw = sw;
+		this.tamanhoPop = tamanhoPop;
+	}
 	                 
 	/**
 	 * Gera a populção inicial (P) para o problema.
 	 * @return Uma matriz onde cada uma das linhas representa um individuo (solução candidata) 
 	 */
-	protected abstract byte[][] geraPopulacaoInicial(saveWorld sw, int tamanho);
+	protected abstract byte[][] geraPopulacaoInicial();
 	
 	/**
 	 * Gera uma nova população (P') a partir de P.
@@ -80,9 +87,9 @@ public abstract class AlgoritimoGenetico {
 	 * @param sw objeto com dados da instência do  problema
 	 * @return Solução do problema
 	 */
-	public final Solucao geraSolucao(saveWorld sw)
+	public final Solucao geraSolucao()
 	{
-		populacaoP = this.geraPopulacaoInicial(sw, 30);
+		populacaoP = this.geraPopulacaoInicial();
 		int i = 0;
 		while(i < 1998)//TODO limitar por tempo: 1 minuto
 		{

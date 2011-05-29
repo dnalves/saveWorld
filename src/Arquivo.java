@@ -38,9 +38,9 @@ public class Arquivo
 	 * Carrega os dados de uma instância do problema de um arquivo
 	 * @return Objeto com os dados.
 	 */
-	public saveWorld loadDados()
+	public SaveWorld loadDados()
 	{
-	    saveWorld sw = new saveWorld();
+	    SaveWorld sw = new SaveWorld();
 	    
 	    try 
 	    {	          	    	 

@@ -8,6 +8,10 @@ import java.util.Random;
  */
 public class Tentativa1 extends AlgoritimoGenetico {
 
+	public Tentativa1(SaveWorld sw, int tamanhoPop) {
+		super(sw, tamanhoPop);
+	}
+
 	@Override
 	protected byte[][] atualizaPopulacao() {
 		// TODO Auto-generated method stub
@@ -16,18 +20,18 @@ public class Tentativa1 extends AlgoritimoGenetico {
 
 	@Override
 	protected byte[][] evolua() {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 
 	@Override
-	protected byte[][] geraPopulacaoInicial(saveWorld sw, int tamanho) {
+	protected byte[][] geraPopulacaoInicial() {
 		
 		int numEstacoes = sw.getNumEstacoes();
-		byte[][] retorno = new byte[tamanho][numEstacoes];
+		byte[][] retorno = new byte[tamanhoPop][numEstacoes];
 		Random generator = new Random();
 		
-		for (int i = 0; i < tamanho; i++) {
+		for (int i = 0; i < tamanhoPop; i++) {
 			for (int j = 0; j < numEstacoes; j++) {
 				
 				//Gerando popula‹o inicial rand™mica

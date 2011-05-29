@@ -1,5 +1,5 @@
 
-public class saveWorld {
+public class SaveWorld {
 
 	private int numPontos;//numero de pontos que devem ser cobertos
 	private int numEstacoes;
@@ -29,11 +29,11 @@ public class saveWorld {
 		this.estacoes = estacoes;
 	}	
 
-	public static void save(String nomeArquivo) 
+	public static void save(String nomeArquivo, int tamanhoPop) 
 	{
 		Arquivo a = new Arquivo(nomeArquivo);
-		saveWorld sw = a.loadDados();
-		Solucao s = new Tentativa1().geraSolucao(sw);		
+		SaveWorld sw = a.loadDados();
+		Solucao s = new Tentativa1(sw, tamanhoPop).geraSolucao();		
 		s.showResult();
 	}
 	
@@ -42,7 +42,7 @@ public class saveWorld {
 	 */
 	public static void main(String[] args) 
 	{
-		saveWorld.save("i1.txt");
+		SaveWorld.save("i1.txt", 30);
 				
 	}
 
