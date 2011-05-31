@@ -29,11 +29,11 @@ public class SaveWorld {
 		this.estacoes = estacoes;
 	}	
 
-	public static void save(String nomeArquivo, int tamanhoPop) 
+	public static void save(String nomeArquivo) 
 	{
 		Arquivo a = new Arquivo(nomeArquivo);
 		SaveWorld sw = a.loadDados();
-		Solucao s = new Tentativa1(sw, tamanhoPop).geraSolucao();		
+		Solucao s = new Tentativa2(sw).geraSolucao(59);		
 		s.showResult();
 	}
 	
@@ -42,7 +42,7 @@ public class SaveWorld {
 	 */
 	public static void main(String[] args) 
 	{
-		SaveWorld.save("i1.txt", 30);
+		SaveWorld.save(args[0]);
 				
 	}
 

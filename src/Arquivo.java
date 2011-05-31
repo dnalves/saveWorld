@@ -30,7 +30,6 @@ public class Arquivo
 			retorno[i - 2] = Integer.parseInt(linha[i]);
 		}
 		
-		
 		return retorno;
 	}
 	
