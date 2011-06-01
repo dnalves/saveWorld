@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Random;
 
 
@@ -14,43 +15,58 @@ public class Tentativa2 extends AlgoritimoGenetico {
 	}
 
 	@Override
-	protected byte[][] atualizaPopulacao() {
-		// TODO Auto-generated method stub
-		return null;
+	protected void atualizaPopulacao() {
+		
 	}
 
 	@Override
-	protected byte[][] evolua() {
+	protected void evolua() {
 		
 		int metade = sw.getNumEstacoes() / 2;
+		int[] repP = new int[sw.getNumEstacoes()];
+		int[] repPLinha = new int[sw.getNumEstacoes()];
 		
-		// Coloca a 1a metade da instancia vinda de P, a 2a metade é de PLinha
 		for (int i = 0; i < populacaoP.length; i++) {
+			repP = populacaoP[i].getRepresentacao();
+			repPLinha = populacaoPLinha[i].getRepresentacao();
+			
+			// copia a 1a metade de P para PLinha
+			// a 2a metade é a de PLinha
 			for (int j = 0; j < metade; j++) {
-				populacaoPLinha[i][j] = populacaoP[i][j];
+				repPLinha[j] = repP[j];
 			}
+			
+			populacaoPLinha[i].setRepresentacao(repPLinha);
+			
 		}
-		
-		return null;
+
 	}
 
 	@Override
-	protected byte[][] geraPopulacaoInicial() {
+	protected void geraPopulacaoInicial() {
 		
 		int numEstacoes = sw.getNumEstacoes();
-		byte[][] retorno = new byte[INDIVIDUOS_POP_INICIAL][numEstacoes];
+		populacaoP = new Solucao[INDIVIDUOS_POP_INICIAL];
+		populacaoPLinha = new Solucao[INDIVIDUOS_POP_INICIAL];
+		int[] representacao = new int[sw.getNumEstacoes()];
 		Random generator = new Random();
 		
 		for (int i = 0; i < INDIVIDUOS_POP_INICIAL; i++) {
 			for (int j = 0; j < numEstacoes; j++) {
-				
-				//Gerando populaca?‹o inicial rando™mica
-				retorno[i][j] = (byte) generator.nextInt(2);
-				
+				//Gerando populacã‹o P inicial rando™mica
+				representacao[j] = generator.nextInt(2);
 			}
+			populacaoP[i] = new Solucao(representacao);
 		}
 		
-		return retorno;
+		for (int i = 0; i < INDIVIDUOS_POP_INICIAL; i++) {
+			for (int j = 0; j < numEstacoes; j++) {
+				//Gerando populacã‹o P inicial rando™mica
+				representacao[j] = generator.nextInt(2);
+			}
+			populacaoPLinha[i] = new Solucao(representacao);
+		}
+		
 	}
 
 }

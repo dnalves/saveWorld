@@ -6,10 +6,10 @@ public class Estacao
 {
 	
 	private String nome;
-	private float custoReal; 
+	private double custoReal; 
 	private int[] pontosCobertos;
 	
-	public Estacao(String nome, float custoReal, int[] pontosCobertos) {
+	public Estacao(String nome, double custoReal, int[] pontosCobertos) {
 		super();
 		this.nome = nome;
 		this.custoReal = custoReal;
@@ -24,11 +24,11 @@ public class Estacao
 		this.nome = nome;
 	}
 
-	public float getCustoReal() {
+	public double getCustoReal() {
 		return custoReal;
 	}
 
-	public void setCustoReal(float custoReal) {
+	public void setCustoReal(double custoReal) {
 		this.custoReal = custoReal;
 	}
 
