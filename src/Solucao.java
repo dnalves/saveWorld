@@ -7,19 +7,29 @@ public class Solucao {
 	private int total;//número de estações utilizadas na solução
 	private ArrayList<String> estacoesSolucao;//estacoes escolhida como solucao
 	private int[] representacao;//representação da solução
+	private ArrayList<Integer> pontosCobertos;
+	private double numPontosCobertos;
 	
 	/**
 	 * Instancia uma nova solução.
-	 * Já calcula o valor objetivo e o número de estações utilizadas.
+	 * Já calcula o valor objetivo e o número de estações e quais foram utilizadas.
 	 *
 	 * @param representacao um int[] com a representação da solução contendo 0s e 1s
+	 * @param sw TODO
 	 */
-	public Solucao(int[] representacao){
+	public Solucao(int[] representacao, SaveWorld sw){
 		
-		Estacao[] estacao = new Estacao[representacao.length];
+		Estacao[] estacao = sw.getEstacoes();
+		
+		this.estacoesSolucao = new ArrayList<String>();
+		this.pontosCobertos = new ArrayList<Integer>();
 		
 		valor = 0;
 		total = 0;
+		numPontosCobertos = 0;
+		
+		int[] pontos;
+		Integer ponto;
 		
 		this.setRepresentacao(new int[representacao.length]);
 		this.setRepresentacao(representacao.clone());
@@ -28,7 +38,20 @@ public class Solucao {
 			if(representacao[i] == 1) {
 				total++;
 				valor += estacao[i].getCustoReal();
-				estacoesSolucao.add(new String(estacao[i].getNome()));
+				this.estacoesSolucao.add(new String(estacao[i].getNome()));
+				
+				// Passa pelos pontos cobertos pela estação e testa
+				// se já está no conjunto de pontos cobertos pela solução
+				pontos = estacao[i].getPontosCobertos();
+				for (int pt : pontos) {
+					ponto = Integer.valueOf(pt);
+					if(!pontosCobertos.contains(ponto)){
+						pontosCobertos.add(new Integer(pt));
+						this.numPontosCobertos++;
+						
+					}
+				}
+				
 			}
 		}
 		
@@ -71,6 +94,22 @@ public class Solucao {
 
 	public int[] getRepresentacao() {
 		return representacao;
+	}
+
+	public void setPontosCobertos(ArrayList<Integer> pontosCobertos) {
+		this.pontosCobertos = pontosCobertos;
+	}
+
+	public ArrayList<Integer> getPontosCobertos() {
+		return pontosCobertos;
+	}
+
+	public void setNumPontosCobertos(double numPontosCobertos) {
+		this.numPontosCobertos = numPontosCobertos;
+	}
+
+	public double getNumPontosCobertos() {
+		return numPontosCobertos;
 	}
 
 	

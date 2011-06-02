@@ -1,10 +1,5 @@
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Vector;
 
 
 public abstract class AlgoritimoGenetico {
@@ -25,6 +20,8 @@ public abstract class AlgoritimoGenetico {
 	public AlgoritimoGenetico(SaveWorld sw)
 	{
 		super();
+		populacaoP = new Solucao[INDIVIDUOS_POP_INICIAL];
+		populacaoPLinha = new Solucao[INDIVIDUOS_POP_INICIAL];
 		this.sw = sw;
 	}
 	                 
@@ -75,18 +72,39 @@ public abstract class AlgoritimoGenetico {
 //	}
 	
 	/**
-	 * Seleciona a melhor solução global encontrada (presente em P).
-	 * @return Solução de menor custo em P
-	 */
-	private Solucao getMelhorSolucao()
+ * Seleciona a melhor solução global encontrada (presente em população).
+ *
+ * @param populacao a população onde deve ser realizada a busca
+ * @return Solução de menor custo em população
+ */
+//	protected Solucao getMelhorSolucao(Solucao[] populacao)
+//	{		
+//		Solucao melhorSolucao = null;
+//		double menorCusto = Double.MAX_VALUE;
+//		double valorSol, numPontosCobertos;
+//		
+//		for (Solucao solucao : populacao) {
+//			valorSol = solucao.getValor();
+//			numPontosCobertos = solucao.getNumPontosCobertos();
+//			if(valorSol < menorCusto){
+//				menorCusto = valorSol;
+//				melhorSolucao = solucao;
+//			}
+//		}
+//		
+//		return melhorSolucao;
+//	}
+	
+	protected Solucao getMelhorSolucao(ArrayList<Solucao> populacao)
 	{		
 		Solucao melhorSolucao = null;
-		double menorCusto = Double.MAX_VALUE;
-		double valorSol;
+		double menorCusto = Double.POSITIVE_INFINITY;
+		double valorSol, numPontosCobertos;
 		
-		for (Solucao solucao : populacaoP) {
+		for (Solucao solucao : populacao) {
 			valorSol = solucao.getValor();
-			if(valorSol < menorCusto){
+			numPontosCobertos = solucao.getNumPontosCobertos();
+			if(valorSol < menorCusto && numPontosCobertos == sw.getNumPontos()){
 				menorCusto = valorSol;
 				melhorSolucao = solucao;
 			}
@@ -108,6 +126,25 @@ public abstract class AlgoritimoGenetico {
 		return (l2 - l1)/1000;
 	}
 	
+	protected Solucao getSolucaoIncompleta(ArrayList<Solucao> populacao){
+		Solucao melhorSolucao = null;
+		double menorCusto = Double.POSITIVE_INFINITY;
+		int pontosCobertos = Integer.MIN_VALUE;
+		double valorSol, numPontosCobertos;
+		
+		for (Solucao solucao : populacao) {
+			valorSol = solucao.getValor();
+			numPontosCobertos = solucao.getNumPontosCobertos();
+			if(valorSol < menorCusto && numPontosCobertos > pontosCobertos){
+				menorCusto = valorSol;
+				numPontosCobertos = pontosCobertos;
+				melhorSolucao = solucao;
+			}
+		}
+		
+		return melhorSolucao;
+	}
+	
 	/**
 	 * Algoritmo genetico basico
 	 * @param duracao Quanto tempo que o algoritimo deve executar (em segundos).
@@ -118,7 +155,6 @@ public abstract class AlgoritimoGenetico {
 		Date ini = new Date();
 		
 		this.geraPopulacaoInicial();
-		this.geraPopulacaoInicial();
 		
 		while(this.secondsBetween(ini, new Date()) < duracao)
 		{
@@ -126,7 +162,12 @@ public abstract class AlgoritimoGenetico {
 			atualizaPopulacao();			
 		}
 		
-		return this.getMelhorSolucao(); 
+		ArrayList<Solucao> solucoes = new ArrayList<Solucao>();
+		for (Solucao solucao : populacaoP) {
+			solucoes.add(solucao);
+		}
+		
+		return this.getMelhorSolucao(solucoes); 
 	}
 	
 	/**

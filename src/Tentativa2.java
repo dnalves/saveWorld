@@ -16,7 +16,33 @@ public class Tentativa2 extends AlgoritimoGenetico {
 
 	@Override
 	protected void atualizaPopulacao() {
+		Solucao[] atualizada = new Solucao[INDIVIDUOS_POP_INICIAL];
+		ArrayList<Solucao> popP = new ArrayList<Solucao>();
+		ArrayList<Solucao> popPLinha = new ArrayList<Solucao>();
 		
+		for (int i = 0; i < populacaoP.length; i++) {
+			popP.add(populacaoPLinha[i]);
+		}
+		for (int i = 0; i < populacaoPLinha.length; i++) {
+			popPLinha.add(populacaoPLinha[i]);
+		}
+		
+		for (int i = 0; i < atualizada.length / 2; i++) {
+			atualizada[i] = getMelhorSolucao(popP);
+			if(atualizada[i] == null){
+				atualizada[i] = getSolucaoIncompleta(popP);
+			}
+			popP.remove(atualizada[i]);
+		}
+		for (int i = atualizada.length / 2 ; i < atualizada.length ; i++){
+			atualizada[i] = getMelhorSolucao(popPLinha);
+			if(atualizada[i] == null){
+				atualizada[i] = getSolucaoIncompleta(popPLinha);
+			}
+			popPLinha.remove(atualizada[i]);
+		}
+		
+		this.populacaoP = atualizada;	
 	}
 
 	@Override
@@ -45,9 +71,7 @@ public class Tentativa2 extends AlgoritimoGenetico {
 	@Override
 	protected void geraPopulacaoInicial() {
 		
-		int numEstacoes = sw.getNumEstacoes();
-		populacaoP = new Solucao[INDIVIDUOS_POP_INICIAL];
-		populacaoPLinha = new Solucao[INDIVIDUOS_POP_INICIAL];
+		int numEstacoes = sw.getNumEstacoes();		
 		int[] representacao = new int[sw.getNumEstacoes()];
 		Random generator = new Random();
 		
@@ -56,7 +80,7 @@ public class Tentativa2 extends AlgoritimoGenetico {
 				//Gerando populacã‹o P inicial rando™mica
 				representacao[j] = generator.nextInt(2);
 			}
-			populacaoP[i] = new Solucao(representacao);
+			populacaoP[i] = new Solucao(representacao, sw);
 		}
 		
 		for (int i = 0; i < INDIVIDUOS_POP_INICIAL; i++) {
@@ -64,7 +88,7 @@ public class Tentativa2 extends AlgoritimoGenetico {
 				//Gerando populacã‹o P inicial rando™mica
 				representacao[j] = generator.nextInt(2);
 			}
-			populacaoPLinha[i] = new Solucao(representacao);
+			populacaoPLinha[i] = new Solucao(representacao, sw);
 		}
 		
 	}

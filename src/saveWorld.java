@@ -42,7 +42,7 @@ public class SaveWorld {
 	 */
 	public static void main(String[] args) 
 	{
-		SaveWorld.save("i1.txt");
+		SaveWorld.save("999");
 				
 	}
 
