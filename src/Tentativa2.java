@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.Random;
 
 
@@ -91,6 +93,46 @@ public class Tentativa2 extends AlgoritimoGenetico {
 			populacaoPLinha[i] = new Solucao(representacao, sw);
 		}
 		
+		
+	}
+	
+	private void geraPopulacaoInicialHeuristica(){
+		LinkedList<Estacao> ordenada = ordenaEstacoesRelacaoPontosCusto(sw.getEstacoes());
+		
+	}
+
+	
+	/**
+	 * Ordena estacoes utilizando a relação pontos cobertos sobre o custo.
+	 * Em ordem decerscente.
+	 *
+	 * @param estacoes
+	 * @return Uma LinkedList ordenada
+	 */
+	private LinkedList<Estacao> ordenaEstacoesRelacaoPontosCusto(Estacao[] estacoes) {
+		
+		LinkedList<Estacao> list = new LinkedList<Estacao>();
+		list.add(estacoes[0].clone());
+		
+		Estacao estacao, estacaoLista;
+		double relacaoPontosCusto;
+		int j;
+		
+		for (int i = 1 ; i < estacoes.length ; i++){
+			estacao = estacoes[i];
+			relacaoPontosCusto = estacao.getPontosCobertos().length/estacao.getCustoReal();
+			for (j = 0 ; j < list.size() ; j++) {
+				estacaoLista = list.get(j);
+				if(relacaoPontosCusto < (estacaoLista.getPontosCobertos().length/estacao.getCustoReal())){
+					j++;
+				} else {
+					break;
+				}
+			}
+			list.add(j, estacao);
+		}
+		
+		return list;
 	}
 
 }

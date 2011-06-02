@@ -15,6 +15,13 @@ public class Estacao
 		this.custoReal = custoReal;
 		this.pontosCobertos = pontosCobertos;
 	}
+	
+	@Override
+	public Estacao clone(){
+		Estacao estacao = new Estacao(this.nome, this.custoReal, this.pontosCobertos);
+		return estacao;
+		
+	}
 
 	public String getNome() {
 		return nome;
