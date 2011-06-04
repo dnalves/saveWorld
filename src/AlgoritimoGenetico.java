@@ -7,7 +7,15 @@ public abstract class AlgoritimoGenetico {
 	//numero de individuos n população inicial. 
 	//por default são 30, mas nada impede que uma 
 	//classe que implemente use outro valor
-	protected static final int INDIVIDUOS_POP_INICIAL = 30; 
+	protected static final int INDIVIDUOS_POP_INICIAL = 30;
+	
+	//fator de divisao na utilizacao da heuristica
+	//construtiva de geracao de populacao inicial
+	protected static final int FATOR_PASSOS = 4;
+	
+	//fator de divisao para decisao de qual a parcela
+	//do numero de estacoes "melhores" sera escolhida
+	protected static final int FATOR_ESCOLHA = 2;
 	
 	protected static final byte ESTACAO_AUSENTE = 0;
 	protected static final byte ESTACAO_PRESENTE = 1;

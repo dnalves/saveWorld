@@ -7,7 +7,7 @@ public class Solucao {
 	private int total;//número de estações utilizadas na solução
 	private ArrayList<String> estacoesSolucao;//estacoes escolhidas como solucao
 	private int[] representacao;//representação da solução (vetor de 0s e 1s)
-	private double numPontosCobertos;//numero de pontos cobertos pela solução
+	private int numPontosCobertos;//numero de pontos cobertos pela solução
 	
 	/**
 	 * Instancia uma nova solução.
@@ -99,11 +99,11 @@ public class Solucao {
 		return representacao;
 	}
 
-	public void setNumPontosCobertos(double numPontosCobertos) {
+	public void setNumPontosCobertos(int numPontosCobertos) {
 		this.numPontosCobertos = numPontosCobertos;
 	}
 
-	public double getNumPontosCobertos() {
+	public int getNumPontosCobertos() {
 		return numPontosCobertos;
 	}
 
