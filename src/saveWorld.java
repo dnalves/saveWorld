@@ -1,7 +1,6 @@
-
 public class SaveWorld {
 
-	private int numPontos;//numero de pontos que devem ser cobertos
+	private int numPontos;	//numero de pontos que devem ser cobertos
 	private int numEstacoes;
 	private Estacao[] estacoes;
 	
@@ -33,7 +32,7 @@ public class SaveWorld {
 	{
 		Arquivo a = new Arquivo(nomeArquivo);
 		SaveWorld sw = a.loadDados();
-		Solucao s = new Tentativa2(sw).geraSolucao(59);		
+		Solucao s = new Tentativa3(sw).geraSolucao(59);		
 		s.showResult();
 	}
 	
@@ -42,7 +41,7 @@ public class SaveWorld {
 	 */
 	public static void main(String[] args) 
 	{
-		SaveWorld.save("999");
+		SaveWorld.save("teste");
 				
 	}
 

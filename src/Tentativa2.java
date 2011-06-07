@@ -96,8 +96,9 @@ public class Tentativa2 extends AlgoritimoGenetico {
 		
 	}
 	
-	private void geraPopulacaoInicialHeuristica(){
+	protected void geraPopulacaoInicialHeuristica(){
 		LinkedList<Estacao> ordenada = ordenaEstacoesRelacaoPontosCusto(sw.getEstacoes());
+		
 		
 	}
 
